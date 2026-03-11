@@ -43,6 +43,7 @@ npm run start:dev
 ```
 
 **`.env` for backend:**
+
 ```env
 MONGODB_URI=mongodb://localhost:27017/snippet-vault
 PORT=3001
@@ -68,6 +69,7 @@ npm run dev
 ```
 
 **`.env.local` for frontend:**
+
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:3001/api
 ```
@@ -77,6 +79,7 @@ NEXT_PUBLIC_API_URL=http://localhost:3001/api
 ## 🔨 Production Build
 
 ### Backend
+
 ```bash
 cd backend
 npm run build
@@ -84,6 +87,7 @@ npm run start:prod
 ```
 
 ### Frontend
+
 ```bash
 cd frontend
 npm run build
@@ -98,22 +102,22 @@ Base URL: `http://localhost:3001/api`
 
 ### Snippets
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/snippets` | List all snippets (paginated) |
-| `POST` | `/snippets` | Create a new snippet |
-| `GET` | `/snippets/tags` | Get all unique tags |
-| `GET` | `/snippets/:id` | Get snippet by ID |
-| `PUT` | `/snippets/:id` | Update snippet |
-| `DELETE` | `/snippets/:id` | Delete snippet |
+| Method   | Endpoint         | Description                   |
+| -------- | ---------------- | ----------------------------- |
+| `GET`    | `/snippets`      | List all snippets (paginated) |
+| `POST`   | `/snippets`      | Create a new snippet          |
+| `GET`    | `/snippets/tags` | Get all unique tags           |
+| `GET`    | `/snippets/:id`  | Get snippet by ID             |
+| `PUT`    | `/snippets/:id`  | Update snippet                |
+| `DELETE` | `/snippets/:id`  | Delete snippet                |
 
 ### Query Parameters for `GET /snippets`
 
-| Param | Type | Description |
-|-------|------|-------------|
-| `q` | string | Full-text search by title/content |
-| `tag` | string | Filter by tag |
-| `page` | number | Page number (default: 1) |
+| Param   | Type   | Description                            |
+| ------- | ------ | -------------------------------------- |
+| `q`     | string | Full-text search by title/content      |
+| `tag`   | string | Filter by tag                          |
+| `page`  | number | Page number (default: 1)               |
 | `limit` | number | Items per page (default: 10, max: 100) |
 
 ### Example Requests
@@ -180,10 +184,12 @@ curl http://localhost:3001/api/snippets/tags
 - **Optimistic UI updates** — currently the list re-fetches after delete; would do client-side removal first
 - **Tag autocomplete** — suggest existing tags while typing in the form
 - **Bulk operations** — select multiple snippets to delete or re-tag
-- **Vercel/Railway deploy** — would deploy frontend to Vercel and backend + MongoDB Atlas via Railway with proper env config
 
 ---
 
 ## 🔗 Live Demo
 
-> _Deploy link goes here (e.g. https://snippet-vault.vercel.app)_
+- **Vercel/Railway deploy** — frontend deployed to Vercel, backend deployed to Render.com
+
+> **Frontend:** _https://snippet-khaki.vercel.app/_
+> **Backend** _https://snippet-r3g2.onrender.com/_
