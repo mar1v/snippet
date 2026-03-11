@@ -5,9 +5,9 @@ import { SnippetCard } from "@/components/SnippetCard";
 import { getApiErrorMessage, snippetsApi } from "@/lib/api";
 import { Snippet } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 
-export default function HomePage() {
+function HomePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -158,7 +158,7 @@ export default function HomePage() {
                 #{t}
               </button>
             ))}
-            {tag && allTags.length > 0 && (
+            {tag && (
               <button
                 onClick={() => updateParams({ tag: "" })}
                 className="text-xs px-2 py-1 rounded-md"
@@ -175,19 +175,19 @@ export default function HomePage() {
         <div className="flex items-center gap-2 mb-4 flex-wrap">
           {q && (
             <span
-              className="text-xs px-3 py-1 rounded-full flex items-center gap-1"
+              className="text-xs px-3 py-1 rounded-full"
               style={{
                 background: "var(--accent-glow)",
                 color: "var(--accent)",
                 border: "1px solid var(--accent)",
               }}
             >
-              Search: "{q}"
+              Search: &quot;{q}&quot;
             </span>
           )}
           {tag && (
             <span
-              className="text-xs px-3 py-1 rounded-full flex items-center gap-1"
+              className="text-xs px-3 py-1 rounded-full"
               style={{
                 background: "var(--muted)",
                 color: "var(--dim)",
@@ -295,5 +295,29 @@ export default function HomePage() {
         </>
       )}
     </div>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div
+              key={i}
+              className="rounded-xl p-5 animate-pulse"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+                height: "180px",
+              }}
+            />
+          ))}
+        </div>
+      }
+    >
+      <HomePageContent />
+    </Suspense>
   );
 }
